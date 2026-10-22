@@ -111,8 +111,8 @@ function render() {
         `ผลจากเครื่องทดสอบ: ${reportCell(`machine-${index}`).textContent} kN`,
         `แรงกดปรับแก้แล้ว: ${reportCell(`corrected-${index}`).textContent} kN`,
         `กำลังอัด: ${reportCell(`strength-${index}`).textContent} MPa`,
-        '',
       );
+      if (index < sampleNames.length - 1) reportLines.push('', '────────────────────────', '');
     });
     reportLines.push(`ค่าเฉลี่ยกำลังอัด (AVG): ${reportCell('average').textContent} MPa`);
     const text = reportLines.join('\n');

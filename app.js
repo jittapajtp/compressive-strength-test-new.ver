@@ -1,6 +1,6 @@
 const types = [
   'Microfine Cement',
-  'Oilwell Cement',
+  'Oil Well Cement',
   'TPI Portland Cement Type I (Red)',
 ];
 const sampleNames = ['ตัวอย่างที่ 1', 'ตัวอย่างที่ 2', 'ตัวอย่างที่ 3'];

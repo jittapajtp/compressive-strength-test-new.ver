@@ -31,19 +31,20 @@ function render() {
   document.getElementById('app').innerHTML = `<main class="page-shell">
     <header class="topbar"><a class="brand" href="#" aria-label="หน้าแรก"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5h5.2l2.8 4 2.8-4H20v14h-4V11l-4 5-4-5v8H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><span class="brand-name">MATERIALS LAB<span>TESTING WORKSHEET</span></span></a><div class="top-note"><span class="live-dot"></span>เครื่องมือคำนวณผลทดสอบ</div></header>
     <section class="intro"><div class="eyebrow"><span>LABORATORY</span><i></i><span>CONCRETE & CEMENT</span></div><h1>Compressive strength <em>Test</em></h1><p>บันทึกข้อมูลตัวอย่างและคำนวณค่ากำลังอัดโดยอัตโนมัติ</p></section>
-    <section class="test-info"><label class="select-field"><span class="field-label"><span class="field-number">01</span>ชนิดปูน</span><span class="select-wrap"><select id="cement-type" aria-label="เลือกชนิดปูน">${types.map((type) => `<option>${type}</option>`).join('')}</select><span class="select-arrow">⌄</span></span></label><label class="date-field"><span class="field-label"><span class="field-number">02</span>วันที่เก็บตัวอย่าง</span><span class="date-wrap"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="sample-date" type="date" value="${todayISO}" aria-label="วันที่เก็บตัวอย่าง"></span></label><label class="age-field"><span class="field-label"><span class="field-number">03</span>อายุลูกปูน</span><span class="input-wrap"><input id="cement-age" type="number" min="0" step="1" inputmode="numeric" placeholder="เช่น 7" aria-label="อายุลูกปูน"><span>วัน</span></span></label><label class="shift-field"><span class="field-label"><span class="field-number">04</span>กะการทดสอบ</span><span class="select-wrap"><select id="shift-type" aria-label="เลือกกะการทดสอบ"><option>Day Shift</option><option>Night Shift</option></select><span class="select-arrow">⌄</span></span></label></section>
+    <section class="test-info"><label class="select-field"><span class="field-label"><span class="field-number">01</span>ชนิดปูน</span><span class="select-wrap"><select id="cement-type" aria-label="เลือกชนิดปูน">${types.map((type) => `<option>${type}</option>`).join('')}</select><span class="select-arrow">⌄</span></span></label><label class="tester-field"><span class="field-label"><span class="field-number">02</span>เครื่องทดสอบ</span><span class="select-wrap"><select id="tester-location" aria-label="เลือกเครื่องทดสอบ"><option value="rama9">พระราม 9</option><option value="rama3">พระราม 3</option></select><span class="select-arrow">⌄</span></span></label><label class="date-field"><span class="field-label"><span class="field-number">03</span>วันที่เก็บตัวอย่าง</span><span class="date-wrap"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="sample-date" type="date" value="${todayISO}" aria-label="วันที่เก็บตัวอย่าง"></span></label><label class="age-field"><span class="field-label"><span class="field-number">04</span>อายุลูกปูน</span><span class="input-wrap"><input id="cement-age" type="number" min="0" step="1" inputmode="numeric" placeholder="เช่น 7" aria-label="อายุลูกปูน"><span>วัน</span></span></label><label class="shift-field"><span class="field-label"><span class="field-number">05</span>กะการทดสอบ</span><span class="select-wrap"><select id="shift-type" aria-label="เลือกกะการทดสอบ"><option>Day Shift</option><option>Night Shift</option></select><span class="select-arrow">⌄</span></span></label></section>
     <div class="section-heading"><div><span class="eyebrow">TEST SPECIMENS</span><h2>ข้อมูลตัวอย่าง</h2></div><span class="specimen-count">03 <span>SPECIMENS</span></span></div>
     <section class="samples" aria-label="ข้อมูลตัวอย่างสามลูก">${sampleNames.map((_, index) => sampleCard(index)).join('')}</section>
     <section class="summary"><div class="summary-copy"><span class="summary-kicker">AVERAGE STRENGTH</span><h2>ค่าเฉลี่ยกำลังอัด</h2><p>คำนวณจากตัวอย่างที่มีข้อมูลครบ</p></div><div class="average"><span data-result="average">—</span><small>MPa</small></div></section>
-    <footer class="formula"><div class="formula-label"><span class="formula-icon">ƒx</span><div><strong>สูตรคำนวณ</strong><small>FORMULA REFERENCE</small></div></div><div class="formula-equations"><p><span>พื้นที่หน้าตัด</span><code>กว้าง × ยาว</code></p><p><span>แรงกดปรับแก้แล้ว</span><code>(ผลจากเครื่องทดสอบ × 0.998) + 2.782</code></p><p><span>กำลังอัด</span><code>(แรงกดปรับแก้แล้ว × 1,000) ÷ พื้นที่หน้าตัด</code></p><p><span>ค่าเฉลี่ย</span><code>ผลรวมกำลังอัด ÷ จำนวนตัวอย่างที่กรอกครบ</code></p></div></footer>
-    <section class="report" aria-labelledby="report-title"><div class="report-heading"><div><span class="eyebrow">TEST REPORT</span><h2 id="report-title">สรุปผลการทดสอบ</h2></div><button class="copy-button" id="copy-report" type="button"><span aria-hidden="true">▢</span> คัดลอกรายงาน</button></div><div class="report-meta"><div><span>ชนิดปูน</span><strong data-report="cement">Microfine Cement</strong></div><div><span>วันที่เก็บตัวอย่าง</span><strong data-report="date">—</strong></div><div><span>อายุลูกปูน</span><strong><b data-report="age">—</b> วัน</strong></div><div><span>กะการทดสอบ</span><strong data-report="shift">Day Shift</strong></div></div><div class="table-wrap"><table class="report-table"><thead><tr><th>ตัวอย่าง</th><th>น้ำหนัก<br>(kg)</th><th>กว้าง<br>(mm)</th><th>ยาว<br>(mm)</th><th>ผลทดสอบ<br>(kN)</th><th>ปรับแก้แล้ว<br>(kN)</th><th>กำลังอัด<br>(MPa)</th></tr></thead><tbody>${sampleNames.map((name, index) => `<tr><th>${name}</th><td data-report="weight-${index}">—</td><td data-report="width-${index}">—</td><td data-report="length-${index}">—</td><td data-report="machine-${index}">—</td><td data-report="corrected-${index}">—</td><td data-report="strength-${index}">—</td></tr>`).join('')}<tr class="avg-row"><th colspan="6">ค่าเฉลี่ยกำลังอัด · AVG</th><td><strong data-report="average">—</strong><small>MPa</small></td></tr></tbody></table></div></section>
+    <footer class="formula"><div class="formula-label"><span class="formula-icon">ƒx</span><div><strong>สูตรคำนวณ</strong><small>FORMULA REFERENCE</small></div></div><div class="formula-equations"><p><span>พระราม 9 · แรงกดปรับแก้</span><code>(ผลจากเครื่องทดสอบ × 0.998) + 2.782</code></p><p><span>พระราม 3 · แรงกดปรับแก้</span><code>(ผลจากเครื่องทดสอบ × 0.963) − 10.43</code></p><p><span>กำลังอัด</span><code>(แรงกดปรับแก้แล้ว × 1,000) ÷ พื้นที่หน้าตัด</code></p><p><span>ค่าเฉลี่ย</span><code>ผลรวมกำลังอัด ÷ จำนวนตัวอย่างที่กรอกครบ</code></p></div></footer>
+    <section class="report" aria-labelledby="report-title"><div class="report-heading"><div><span class="eyebrow">TEST REPORT</span><h2 id="report-title">สรุปผลการทดสอบ</h2></div><button class="copy-button" id="copy-report" type="button"><span aria-hidden="true">▢</span> คัดลอกรายงาน</button></div><div class="report-meta"><div><span>ชนิดปูน</span><strong data-report="cement">Microfine Cement</strong></div><div><span>เครื่องทดสอบ</span><strong data-report="tester">พระราม 9</strong></div><div><span>วันที่เก็บตัวอย่าง</span><strong data-report="date">—</strong></div><div><span>อายุลูกปูน</span><strong><b data-report="age">—</b> วัน</strong></div><div><span>กะการทดสอบ</span><strong data-report="shift">Day Shift</strong></div></div><div class="table-wrap"><table class="report-table"><thead><tr><th>ตัวอย่าง</th><th>น้ำหนัก<br>(kg)</th><th>กว้าง<br>(mm)</th><th>ยาว<br>(mm)</th><th>ผลทดสอบ<br>(kN)</th><th>ปรับแก้แล้ว<br>(kN)</th><th>กำลังอัด<br>(MPa)</th></tr></thead><tbody>${sampleNames.map((name, index) => `<tr><th>${name}</th><td data-report="weight-${index}">—</td><td data-report="width-${index}">—</td><td data-report="length-${index}">—</td><td data-report="machine-${index}">—</td><td data-report="corrected-${index}">—</td><td data-report="strength-${index}">—</td></tr>`).join('')}<tr class="avg-row"><th colspan="6">ค่าเฉลี่ยกำลังอัด · AVG</th><td><strong data-report="average">—</strong><small>MPa</small></td></tr></tbody></table></div></section>
     <div class="page-foot"><span>Materials testing worksheet</span><span>COMPRESSIVE STRENGTH · MPa</span></div>
   </main>`;
 
   const reportCell = (name) => document.querySelector(`[data-report="${name}"]`);
   const update = () => {
     const strengths = [];
-    document.querySelectorAll('[data-report]').forEach((cell) => { if (!['cement', 'date', 'shift'].includes(cell.dataset.report)) cell.textContent = '—'; });
+    document.querySelectorAll('[data-report]').forEach((cell) => { if (!['cement', 'tester', 'date', 'shift'].includes(cell.dataset.report)) cell.textContent = '—'; });
+    const tester = document.getElementById('tester-location').value;
     document.querySelectorAll('[data-result="area"], [data-result="corrected"], [data-result="strength"]').forEach((el) => { el.textContent = '—'; });
     sampleNames.forEach((_, index) => {
       const weightRaw = readValue('weight', index);
@@ -56,7 +57,7 @@ function render() {
       const machine = number(machineRaw);
       const area = width * length;
       const hasMachine = machineRaw !== '';
-      const corrected = machine * 0.998 + 2.782;
+      const corrected = tester === 'rama3' ? machine * 0.963 - 10.43 : machine * 0.998 + 2.782;
       const areaEl = document.querySelector(`[data-result="area"][data-index="${index}"]`);
       const correctedEl = document.querySelector(`[data-result="corrected"][data-index="${index}"]`);
       const strengthEl = document.querySelector(`[data-result="strength"][data-index="${index}"]`);
@@ -82,6 +83,7 @@ function render() {
     document.querySelector('[data-result="average"]').textContent = average === null ? '—' : format(average);
     reportCell('average').textContent = average === null ? '—' : format(average);
     reportCell('cement').textContent = document.getElementById('cement-type').value;
+    reportCell('tester').textContent = tester === 'rama3' ? 'พระราม 3' : 'พระราม 9';
     const date = document.getElementById('sample-date').value;
     if (date) {
       const [year, month, day] = date.split('-').map(Number);
@@ -98,6 +100,7 @@ function render() {
     const reportLines = [
       '📋 รายงานผลทดสอบกำลังอัดปูน (Compressive Strength Test)',
       `ชนิดปูน: ${reportCell('cement').textContent}`,
+      `เครื่องทดสอบ: ${reportCell('tester').textContent}`,
       `วันที่เก็บตัวอย่าง: ${dateText}`,
       `กะการทดสอบ: ${reportCell('shift').textContent}`,
       `อายุลูกปูน: ${reportCell('age').textContent} วัน`,
@@ -138,6 +141,7 @@ function render() {
   });
   document.querySelectorAll('.sample-inputs input').forEach((input) => input.addEventListener('input', update));
   document.getElementById('cement-type').addEventListener('change', update);
+  document.getElementById('tester-location').addEventListener('change', update);
   document.getElementById('sample-date').addEventListener('input', update);
   document.getElementById('shift-type').addEventListener('change', update);
   document.getElementById('cement-age').addEventListener('input', update);
